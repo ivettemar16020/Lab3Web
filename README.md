@@ -1,2 +1,2 @@
-# Lab3Web
-To do list
+# basic-webpack-setup
+Basic webpack setup to test ES6
