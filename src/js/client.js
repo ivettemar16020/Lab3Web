@@ -57,10 +57,8 @@ const render = lState =>  {
 
   for (let i = 0; i < state.tasks.length; i += 1) {
     const listElement = document.createElement('li');
-    listElement.id = `li`;
+    listElement.className = `li`;
     listElement.innerHTML = state.tasks[i][0];
-    list.appendChild(listElement);
-    /*
     if (state.currentSort === 1 && state.tasks[i][1] === true) {
       list.appendChild(listElement);
     }
@@ -69,7 +67,6 @@ const render = lState =>  {
     } else if (state.currentSort === 0) {
       list.appendChild(listElement);
     }
-    */
   }
 
   root.appendChild(list);
@@ -96,14 +93,43 @@ const render = lState =>  {
   list1.addEventListener('click', function(ev) {
   if (ev.target.tagName === 'LI') {
     ev.target.classList.toggle('done');
+    let taskName = ev.target.innerHTML; 
+    for (let i = 0; i < state.tasks.length; i += 1) {
+      if (state.tasks[i][0] === taskName) {
+        if(state.tasks[i][1] === false){
+          state.tasks[i][1] = true;
+        }else{
+          state.tasks[i][1] = false;
+        }
+        console.log(state.tasks[i]);
+      }
+    }
+    
     }
   }, false);
+
+  
 
   // Events
   inputBtn.onclick = () => {
     addTask();
     render(lState);
   };
+
+  state1.onclick = () => {
+    state.currentSort = 0;
+    render(lState);
+  }
+
+  state2.onclick = () => {
+    state.currentSort = 1;
+    render(lState);
+  }
+
+  state3.onclick = () => {
+    state.currentSort = 2;
+    render(lState);
+  }
 
   
 }
@@ -113,7 +139,7 @@ function addTask(){
   if (inputValue === '') {
     alert("Ooops");
   } else {
-    state.tasks.push([document.getElementById("myInput").value, 0]);
+    state.tasks.push([document.getElementById("myInput").value, false]);
   }
   document.getElementById("myInput").value = "";
 }
