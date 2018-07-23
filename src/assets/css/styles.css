@@ -17,7 +17,9 @@ body {
 .state{
     /*box-sizing: border-box;*/
     border-radius: 12px;
-    color: rgb(7, 88, 88);
+    border-bottom-color: rgb(120, 202, 202);
+    border-right-color: rgb(120, 202, 202);
+    color: rgb(24, 78, 78);
     cursor: pointer;
     font-size: 18px;
     height: 4rem;
@@ -56,13 +58,13 @@ ul li:nth-child(odd) {
 
 /* Darker background-color on hover */
 ul li:hover {
-  background: #ddd;
+  background: rgb(84, 153, 153);
 }
 
 /* When clicked on, add a background color and strike out text */
 ul li.done {
   background: #888;
-  color: #fff;
+  color: rgb(120, 202, 202);
   text-decoration: line-through;
 }
 
@@ -70,14 +72,14 @@ ul li.done {
 ul li.done::before {
   content: '';
   position: absolute;
-  border-color: #fff;
+  border-color: rgb(120, 202, 202);
   border-style: solid;
   border-width: 0 2px 2px 0;
   top: 10px;
   left: 16px;
   transform: rotate(45deg);
   height: 15px;
-  width: 7px;
+  width: 8px;
 }
 
 

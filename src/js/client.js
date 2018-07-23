@@ -21,6 +21,7 @@ solicitud
   .catch((err) => {
     // Handle any error that occurred in any of the previous
     // promises in the chain.
+    alert("Ooops");
   });
 
 
@@ -52,6 +53,7 @@ const render = lState =>  {
   //List of tasks
   const list = document.createElement('ul');
   list.className = 'list';
+  list.id = 'myUL';
 
   for (let i = 0; i < state.tasks.length; i += 1) {
     const listElement = document.createElement('li');
@@ -80,6 +82,7 @@ const render = lState =>  {
 
   const inputField = document.createElement('input');
   inputField.className = 'inputField'; 
+  inputField.id = 'myInput';
 
   const inputBtn = document.createElement('button');
   inputBtn.className = 'inputBtn';
@@ -95,7 +98,24 @@ const render = lState =>  {
     ev.target.classList.toggle('done');
     }
   }, false);
+
+  // Events
+  inputBtn.onclick = () => {
+    addTask();
+    render(lState);
+  };
+
   
+}
+
+function addTask(){
+  let inputValue = document.getElementById("myInput").value;
+  if (inputValue === '') {
+    alert("Ooops");
+  } else {
+    state.tasks.push([document.getElementById("myInput").value, 0]);
+  }
+  document.getElementById("myInput").value = "";
 }
 
 render(state);
