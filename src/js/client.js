@@ -55,7 +55,7 @@ const render = lState =>  {
 
   for (let i = 0; i < state.tasks.length; i += 1) {
     const listElement = document.createElement('li');
-    listElement.id = `mensajeindiv ${i}`;
+    listElement.id = `li`;
     listElement.innerHTML = state.tasks[i][0];
     list.appendChild(listElement);
     /*
@@ -88,6 +88,13 @@ const render = lState =>  {
   inputTask.appendChild(inputField); 
   inputTask.appendChild(inputBtn);
 
+  // Add a "done" symbol when clicking on a list item
+  let list1 = document.querySelector('ul');
+  list1.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('done');
+    }
+  }, false);
   
 }
 
