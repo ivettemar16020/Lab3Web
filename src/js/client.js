@@ -1,8 +1,7 @@
 const state = {
   tasks: [], //name and state
-  sort: ['all', 'active', 'completed'],
-  currentSort: 0,
-  isLoading: false
+  currentSort: 0, //it can be 0,1,2
+  isLoading: false //if the data is loading
 };
 
 //FETCH 
@@ -21,31 +20,36 @@ solicitud
   .catch((err) => {
     // Handle any error that occurred in any of the previous
     // promises in the chain.
-    alert("Ooops");
+    alert("Oops an error has occurred");
   });
 
-
+//lState
 const render = lState =>  {
   // Clear previous root content
   if (root.hasChildNodes()) {
     root.innerHTML = null;
   }
 
+  //Div container --> sort buttons 
   const states = document.createElement('div');
   states.className= 'states';
 
-  root.appendChild(states);
-
+  //Button1 --> shows all the tasks
   const state1 = document.createElement('button');
   state1.className = 'state';
   state1.innerHTML = 'ALL';
+
+  //Button2 --> shows all the completed tasks
   const state2 = document.createElement('button');
   state2.className = 'state';
   state2.innerHTML = 'COMPLETED';
+
+  //Button3 --> shows all the active tasks
   const state3 = document.createElement('button');
   state3.className = 'state';
   state3.innerHTML = 'ACTIVE';
 
+  root.appendChild(states);
   states.appendChild(state1);
   states.appendChild(state2);
   states.appendChild(state3);
@@ -55,6 +59,7 @@ const render = lState =>  {
   list.className = 'list';
   list.id = 'myUL';
 
+  //Sort the tasks depending on the state
   for (let i = 0; i < state.tasks.length; i += 1) {
     const listElement = document.createElement('li');
     listElement.className = 'li';
@@ -114,7 +119,8 @@ const render = lState =>  {
     render(lState);
   }, false);
 
-  // Events
+  // Events: onclick
+  // Using render cycle 
   inputBtn.onclick = () => {
     addTask();
     render(lState);
@@ -134,19 +140,21 @@ const render = lState =>  {
     state.currentSort = 2;
     render(lState);
   }
-
   
 }
 
+//Function that add a new task
 function addTask(){
   let inputValue = document.getElementById('myInput').value;
   if (inputValue === '') {
-    alert("Ooops");
+    alert("Blank field");
   } else {
+    //Adding the new task in the array
     state.tasks.push([document.getElementById('myInput').value, false]);
   }
+  //Empty field
   document.getElementById("myInput").value = "";
 }
 
-
+//Rendering 
 render(state);
