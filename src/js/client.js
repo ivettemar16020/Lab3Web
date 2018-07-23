@@ -57,15 +57,19 @@ const render = lState =>  {
 
   for (let i = 0; i < state.tasks.length; i += 1) {
     const listElement = document.createElement('li');
-    listElement.className = `li`;
+    listElement.className = 'li';
     listElement.innerHTML = state.tasks[i][0];
     if (state.currentSort === 1 && state.tasks[i][1] === true) {
       list.appendChild(listElement);
+      listElement.classList.add('complete');
     }
     if (state.currentSort === 2 && state.tasks[i][1] === false) {
       list.appendChild(listElement);
     } else if (state.currentSort === 0) {
       list.appendChild(listElement);
+      if(state.tasks[i][1] === true) {
+        listElement.classList.add('complete');
+      }
     }
   }
 
@@ -88,6 +92,7 @@ const render = lState =>  {
   inputTask.appendChild(inputField); 
   inputTask.appendChild(inputBtn);
 
+
   // Add a "done" symbol when clicking on a list item
   let list1 = document.querySelector('ul');
   list1.addEventListener('click', function(ev) {
@@ -106,9 +111,8 @@ const render = lState =>  {
     }
     
     }
+    render(lState);
   }, false);
-
-  
 
   // Events
   inputBtn.onclick = () => {
@@ -135,13 +139,14 @@ const render = lState =>  {
 }
 
 function addTask(){
-  let inputValue = document.getElementById("myInput").value;
+  let inputValue = document.getElementById('myInput').value;
   if (inputValue === '') {
     alert("Ooops");
   } else {
-    state.tasks.push([document.getElementById("myInput").value, false]);
+    state.tasks.push([document.getElementById('myInput').value, false]);
   }
   document.getElementById("myInput").value = "";
 }
+
 
 render(state);

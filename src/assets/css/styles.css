@@ -68,6 +68,13 @@ ul li.done {
   text-decoration: line-through;
 }
 
+ul li.complete {
+  background: #888;
+  color: rgb(120, 202, 202);
+  text-decoration: line-through;
+}
+
+
 /* Add a "done" mark when clicked on */
 ul li.done::before {
   content: '';
