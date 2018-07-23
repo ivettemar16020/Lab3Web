@@ -4,12 +4,11 @@ body {
 
 .states {
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
     display: flex; 
     flex-direction: row;
     flex-flow: row wrap;
     height: 6rem;
+    justify-content: center;
     margin: 1rem; 
     padding: 0rem;
     width: 75;
@@ -17,10 +16,70 @@ body {
 
 .state{
     /*box-sizing: border-box;*/
-    color: rgb(162, 173, 173);
+    border-radius: 12px;
+    color: rgb(7, 88, 88);
+    cursor: pointer;
+    font-size: 18px;
     height: 4rem;
     width: 25rem;
 }
+
+.state:hover{
+  background-color: rgb(173, 173, 173);
+}
+
+ul {
+  margin: 1rem;
+  padding: 0;
+}
+
+ul li {
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background: #eee;
+  font-size: 18px;
+  transition: 0.2s;
+  
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+ul li:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+/* Darker background-color on hover */
+ul li:hover {
+  background: #ddd;
+}
+
+/* When clicked on, add a background color and strike out text */
+ul li.checked {
+  background: #888;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+/* Add a "checked" mark when clicked on */
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
 
 .inputTask {
   align-items: center;
@@ -39,19 +98,19 @@ body {
   /*box-sizing: border-box;*/
   color: rgb(162, 173, 173);
   height: 2rem;
-  width: 80%;
+  width: 90%;
 }
 
 .inputBtn {
     background-color: rgb(16, 115, 145);
-    border-radius: 15px;
-    border: none;
+    border-radius: 10px;
+    border-left: none;
     box-shadow: 0 9px #999;
     color: #fff;
     cursor: pointer;
     font-size: 24px;
     outline: none;
-    padding: 0;
+    margin-left: 1rem;
     text-align: center;
     text-decoration: none;
   }

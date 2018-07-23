@@ -1,18 +1,28 @@
 const state = {
-  tasks: [['',0]], //name and state
+  tasks: [], //name and state
   sort: ['all', 'active', 'completed'],
   currentSort: 0,
   isLoading: false
 };
 
+//FETCH 
 const solicitud = fetch('https://raw.githubusercontent.com/samuelchvez/todos-fake-json-api/master/db.json');
 
+//Then
 solicitud
   .then(resultado => resultado.json())
-  .then(resultadoJSON =>{
-    state.tasks = resultadoJSON
-    console.log(resultadoJSON)
-    console.log(state.tasks)});
+  .then(resultadoJSON => {
+    for (let i = 0; i < resultadoJSON.length; i = i + 1) {
+      state.tasks.push([resultadoJSON[i].title, resultadoJSON[i].isCompleted]);
+      console.log(state.tasks[i]);
+    }
+  })
+  .then(() => render(state))
+  .catch((err) => {
+    // Handle any error that occurred in any of the previous
+    // promises in the chain.
+  });
+
 
 const render = lState =>  {
   // Clear previous root content
@@ -39,6 +49,30 @@ const render = lState =>  {
   states.appendChild(state2);
   states.appendChild(state3);
 
+  //List of tasks
+  const list = document.createElement('ul');
+  list.className = 'list';
+
+  for (let i = 0; i < state.tasks.length; i += 1) {
+    const listElement = document.createElement('li');
+    listElement.id = `mensajeindiv ${i}`;
+    listElement.innerHTML = state.tasks[i][0];
+    list.appendChild(listElement);
+    /*
+    if (state.currentSort === 1 && state.tasks[i][1] === true) {
+      list.appendChild(listElement);
+    }
+    if (state.currentSort === 2 && state.tasks[i][1] === false) {
+      list.appendChild(listElement);
+    } else if (state.currentSort === 0) {
+      list.appendChild(listElement);
+    }
+    */
+  }
+
+  root.appendChild(list);
+
+  //Add new ones
   const inputTask = document.createElement('div');
   inputTask.className= 'inputTask';
 
